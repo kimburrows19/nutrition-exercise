@@ -1,0 +1,47 @@
+body{
+	background-color: #eee;
+	padding-top: 40px;
+}
+.middle{
+	width: 720px;
+	margin: 0 0;
+	padding: 10px;
+}
+.form-group{
+	margin-top: 10px;
+}
+.form-signin {
+    margin: 0 auto;
+    max-width: 330px;
+    padding: 15px;
+}
+.form-signin input[type="text"] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: -1px;
+}
+.form-signin .form-control {
+    -moz-box-sizing: border-box;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    position: relative;
+}
+input, button, select, textarea {
+    font-family: inherit;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox {
+    margin-bottom: 10px;
+}
+.form-adduser{
+	margin: 0 auto;
+	max-width: 500px;
+	padding:15px;
+}
+.btn-adduser{
+	width: 145px;
+}
