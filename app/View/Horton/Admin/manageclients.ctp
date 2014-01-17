@@ -110,7 +110,7 @@
 </div>
 <?php echo $this->Form->end(); ?>
 
-
+<?php echo $this->element('list_clients', array('clients'=>$clients)); ?>
 <?php echo $this->Html->script('admin/manageclients');?>
 
 

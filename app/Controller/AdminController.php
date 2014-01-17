@@ -7,7 +7,7 @@ class AdminController extends AppController {
  */
 	//public $uses = array('users');
 	var $uses = array('User');
-	var $layout = 'horton';
+	var $layout = 'horton_back';
 	var $helpers = array('Form', 'Html');
 
 	function index(){		
@@ -16,6 +16,8 @@ class AdminController extends AppController {
 	}
 
 	function manageClients(){
+		$clients=$this->User->getClients($this->Session->read('login_id'));
+
 		if($this->request->is('ajax')){
 			$action=$this->request->data['action'];
         	switch ($action) {
@@ -24,11 +26,12 @@ class AdminController extends AppController {
         			break;
         		
         		default:
+        			$this->set('clients',$clients);
         		    $this->render('/Horton/Admin/manageClients');
         			break;
         	}
     	}
-
+    	$this->set('clients',$clients);
 		$this->render('/Horton/Admin/manageClients');
 
 

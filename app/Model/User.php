@@ -33,4 +33,10 @@ class User extends  AppModel{
 	public $hasOne = array('Address'=>array('className' =>'Address',
 											'dependant'=> true));
 	public $belongsTo = array('Role'=>array('className'=>'Role'));
+
+	function getClients($consultant_id){
+		$sql = "SELECT * from users where consultant_id = '{$consultant_id}'";
+		$rst = $this->query($sql);
+		return  $rst;
+	}
 }
