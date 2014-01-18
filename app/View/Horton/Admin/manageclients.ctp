@@ -4,9 +4,18 @@
 									'class'=> 'form-adduser',
 									'role'=>'form'))*/?>
 
-<form class="form-adduser" role="form" id="form-add-new-user">
-<button class="btn btn-lg btn-primary btn-block btn-adduser" id="btn-adduser" type="button">Add New User</button>
-<div id="add-newuser">
+<div class="panel panel-primary">
+<div class="panel-heading"><h3 class="panel-title">My Clients</h3></div>
+<div class="panel-body">
+<?php echo $this->element('list_clients', array('clients'=>$clients)); ?>
+</div>
+</div>
+
+<div class="panel panel-primary">
+<div class="panel-heading" id="btn-adduser"><h3 class="panel-title">Add New Client</h3></div>
+<div class="panel-body" id="add-newuser">
+	<form class="form-adduser" role="form" id="form-add-new-user">
+	<input type="hidden" name="user[consultant_id]" value="<?php echo $consultant['User']['id']; ?>"/>
 	<div class="form-group">
 	<label>Personal Information</label>
 	<input type="hidden" name="action" value="add_user"/>
@@ -105,12 +114,15 @@
 	  </label>
 	</div>
 	</div>
+	<h4>Consultant: <span class="label label-info"><?php echo $consultant['User']['first_name']." ".$consultant['User']['last_name']?></span></h4>
 
 	<button class="btn btn-lg btn-primary btn-block btn-adduser" type="submit">Submit</button>
-</div>
+
 <?php echo $this->Form->end(); ?>
 
-<?php echo $this->element('list_clients', array('clients'=>$clients)); ?>
+</div>
+</div>
+
 <?php echo $this->Html->script('admin/manageclients');?>
 
 

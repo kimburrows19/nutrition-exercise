@@ -23,7 +23,7 @@ $pageDescription = __d('nut_ex_dev', 'Nutrition & Exercise: Eat your way to fitn
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $pageDescription ?>:
+		<?php echo $pageDescription;?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,12 +43,6 @@ $pageDescription = __d('nut_ex_dev', 'Nutrition & Exercise: Eat your way to fitn
 <body>
 	<div id="container" class='container'>
 		<div id="header">
-			<?php //echo $this->Html->link($cakeDescription, 'http://cakephp.org'); 
-			$user='admin';
-			if($user=="admin"){
-				echo $this->element('header');
-			}
-			?>
 		</div>
 		<div id="content">
 			<?php echo $this->Session->flash(); ?>

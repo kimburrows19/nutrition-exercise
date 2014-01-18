@@ -45,3 +45,6 @@ input, button, select, textarea {
 .btn-adduser{
 	width: 145px;
 }
+.nav{
+    margin-bottom: 10px;
+}

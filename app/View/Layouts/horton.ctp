@@ -24,7 +24,7 @@ $pageDescription = __d('nut_ex_dev', 'Nutrition & Exercise: Eat your way to fitn
 	<?php echo $this->Html->charset(); ?>
 	<title>
 		<?php echo $pageDescription ?>:
-		<?php echo $title_for_layout; ?>
+		<?php //echo $title_for_layout; ?>
 	</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php
@@ -65,6 +65,6 @@ $pageDescription = __d('nut_ex_dev', 'Nutrition & Exercise: Eat your way to fitn
 			?>
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	<?php //echo $this->element('sql_dump'); ?>
 </body>
 </html>

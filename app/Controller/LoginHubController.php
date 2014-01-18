@@ -12,10 +12,8 @@ class LoginHubController extends AppController {
 		
 		$user_login_info = $this->User->find('first', array(
         'conditions' => array('User.email_address' => $entered_email)));
-
         if(!empty($user_login_info)){
 	        $pw = hash('sha256', $user_login_info['User']['mui'].$entered_pw);
-
 	        if($pw==$user_login_info['User']['login_pw']){
 	        	$id=$user_login_info['User']['id'];
 	        	$this->Session->write('login_id',$id);

@@ -1,12 +1,5 @@
-<div class="row">
-    <div class="col-md-6">            
-        <div class="navbar">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Dashboard</a></li>
-              <li><a href="#">Manage Clients</a></li>
-              <li><a href="#">Manage Foods</li>
-            </ul>
-        
-        </div> 
-    </div>
-</div>
+<ul class="nav nav-pills">
+  <li class="active"><a href="#">Dashboard</a></li>
+  <li><a href="#">Manage Clients</a></li>
+  <li><a href="#">Manage Foods</a></li>
+</ul>

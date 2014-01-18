@@ -9,6 +9,7 @@ class AdminController extends AppController {
 	var $uses = array('User');
 	var $layout = 'horton_back';
 	var $helpers = array('Form', 'Html');
+	var $components = array('RequestHandler');
 
 	function index(){		
 		//$this->loadModel('Project');  loading a model from an action
@@ -16,27 +17,29 @@ class AdminController extends AppController {
 	}
 
 	function manageClients(){
-		$clients=$this->User->getClients($this->Session->read('login_id'));
+		$login_id=$this->Session->read('login_id');
+		$clients=$this->User->getClients($login_id);
+		$consultant=$this->User->find('first',array('conditions'=>array('User.id'=>$login_id)));
+		$this->set('consultant',$consultant);
+    	$this->set('clients',$clients);
 
 		if($this->request->is('ajax')){
 			$action=$this->request->data['action'];
         	switch ($action) {
         		case 'add_user':
-        			$this->addUser();
+        			$this->addUser($clients);
         			break;
         		
         		default:
-        			$this->set('clients',$clients);
         		    $this->render('/Horton/Admin/manageClients');
         			break;
         	}
     	}
-    	$this->set('clients',$clients);
 		$this->render('/Horton/Admin/manageClients');
 
 
 	}
-	function addUser(){
+	function addUser($clients){
 		$duser=$this->request->data['user'];
 		if(!empty($duser)){
 			$salt = substr(str_shuffle(MD5(microtime())), 0, 5);
@@ -47,10 +50,16 @@ class AdminController extends AppController {
 			if(!empty($user)){
 				$this->request->data['address']['user_id']=$this->User->id;
 				$this->User->Address->save($this->request->data['address']);
-				return new CakeResponse(array('body'=> json_encode(array('val'=>'test ok')),'status'=>200));
+
+				//NEED TO GET CLIENTS AGAIN AFTER ADDING THE USER CANT USE CLIENTS PASSED FROM MANAGE CLIENTS	
+
+				$this->set('clients',$clients);
+				$this->set('message',"User Successfully Added");
+				$this->set('_serialize', array('clients','message'));
+				$this->response->statusCode(200);
 
 			}
 		}
-		return new CakeResponse(array('body'=> json_encode(array('val'=>'wasnotabletosave')),'status'=>200));
+		return new CakeResponse(array('type'=>'json','body'=> json_encode(array('val'=>'wasnotabletosave')),'status'=>200));
 	}
 }

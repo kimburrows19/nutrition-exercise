@@ -1,5 +1,5 @@
 
-<table>
+<table id="tbl_clients">
 <?php echo $this->Html->tableHeaders(array('First', 'Last', 'Phone','Email'));?>
 <tbody>
 	<?php

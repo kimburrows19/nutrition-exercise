@@ -9,15 +9,15 @@ $(document).ready(function(){
     $.ajax({
       url: "manageClients",
       type: "POST",
+      dataType:'json',
       data: data,
       cache: false,
-      success: function (html) {
-        if (html!=='0') {
-        //we say thank you because it's polite and the we can append the html... or do whatever we like with the returned html
-        alert('Thank you!');
+      success: function (jsondata) {
+        if (jsondata!=='0') {
+          $('#tbl_clients').html(getClientListHTML(jsondata['clients']));
         }
         else {
-        alert('An error has occured');
+          alert('An error has occured');
         }
       }
     });
@@ -26,3 +26,30 @@ $(document).ready(function(){
   });
 
 });
+
+function getClientListHTML(data){
+var str = "<table>"+
+        "<tbody>"+
+          "<tr><td>First</td>"+
+              "<td>Last</td>"+
+              "<td>Phone</td>"+
+              "<td>Email</td>"+
+          "</tr>"+
+        "/tbody>"+
+        "<tbody id='list_clients'>";
+      $.each(data,function(index,val){
+       // alert(val['users']['first_name']+"  "+val.users.first_name);
+        str+="<tr><td>"+ val['users']['first_name']+"</td>"+
+                  "<td>"+val['users']['last_name']+"</td>"+
+                  "<td>"+val['users']['phone_primary']+"</td>"+
+                  "<td>"+val['users']['email_address']+"</td>"+
+                  "</tr>";
+      });
+  str+="</tbody>"+
+      "</table>";
+      alert(str);
+      return str;
+
+
+}
+
