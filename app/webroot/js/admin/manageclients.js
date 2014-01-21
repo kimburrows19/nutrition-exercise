@@ -14,7 +14,7 @@ $(document).ready(function(){
       cache: false,
       success: function (jsondata) {
         if (jsondata!=='0') {
-          $('#tbl_clients').html(getClientListHTML(jsondata['clients']));
+          $('#tbl_clients').html(getClientListHTML(jsondata['client_list']));
         }
         else {
           alert('An error has occured');
@@ -35,10 +35,9 @@ var str = "<table>"+
               "<td>Phone</td>"+
               "<td>Email</td>"+
           "</tr>"+
-        "/tbody>"+
+        "</tbody>"+
         "<tbody id='list_clients'>";
       $.each(data,function(index,val){
-       // alert(val['users']['first_name']+"  "+val.users.first_name);
         str+="<tr><td>"+ val['users']['first_name']+"</td>"+
                   "<td>"+val['users']['last_name']+"</td>"+
                   "<td>"+val['users']['phone_primary']+"</td>"+

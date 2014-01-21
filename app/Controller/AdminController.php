@@ -17,29 +17,26 @@ class AdminController extends AppController {
 	}
 
 	function manageClients(){
-		$login_id=$this->Session->read('login_id');
-		$clients=$this->User->getClients($login_id);
-		$consultant=$this->User->find('first',array('conditions'=>array('User.id'=>$login_id)));
-		$this->set('consultant',$consultant);
-    	$this->set('clients',$clients);
-
 		if($this->request->is('ajax')){
 			$action=$this->request->data['action'];
         	switch ($action) {
         		case 'add_user':
-        			$this->addUser($clients);
+        			$this->addUser();
         			break;
         		
         		default:
-        		    $this->render('/Horton/Admin/manageClients');
         			break;
         	}
     	}
+    	$clients=$this->getClients();
+		$consultant=$this->getAdmin();
+    	$this->set('consultant',$consultant);
+    	$this->set('clients',$clients);
 		$this->render('/Horton/Admin/manageClients');
 
 
 	}
-	function addUser($clients){
+	function addUser(){
 		$duser=$this->request->data['user'];
 		if(!empty($duser)){
 			$salt = substr(str_shuffle(MD5(microtime())), 0, 5);
@@ -50,16 +47,21 @@ class AdminController extends AppController {
 			if(!empty($user)){
 				$this->request->data['address']['user_id']=$this->User->id;
 				$this->User->Address->save($this->request->data['address']);
-
-				//NEED TO GET CLIENTS AGAIN AFTER ADDING THE USER CANT USE CLIENTS PASSED FROM MANAGE CLIENTS	
-
-				$this->set('clients',$clients);
+				$this->set('client_list',$this->getClients());
 				$this->set('message',"User Successfully Added");
-				$this->set('_serialize', array('clients','message'));
+				$this->set('_serialize', array('client_list','message'));
 				$this->response->statusCode(200);
 
 			}
 		}
 		return new CakeResponse(array('type'=>'json','body'=> json_encode(array('val'=>'wasnotabletosave')),'status'=>200));
+	}
+	function getAdmin(){
+		$lid=$this->Session->read('login_id');
+		return $this->User->find('first',array('conditions'=>array('User.id'=>$lid)));
+	}
+	function getClients(){
+		$lid=$this->Session->read('login_id');
+		return $this->User->getClients($lid);
 	}
 }
