@@ -24,6 +24,29 @@ $(document).ready(function(){
     //this is important if you don't use this the form will be submitted using normal POST:
     return false;
   });
+  $('#form-update-user').submit(function(){
+    
+    var url="../manageClients";
+      var data = $(this).serialize();
+      $.ajax({
+          url: url,
+          type:"POST",
+          dataType:"json",
+          data:data,
+          cache:false,
+          success:function(jsondata){
+            if(jsondata!=='0'){
+            }
+            else{alert('An error has occured');}
+          }
+
+      });
+      return false;
+  });
+  $('.btn-edit-user').click(function(){
+      var id = $(this).val();
+      window.location.href="updateUserView/?id="+id; //cakephp already know what controller we are in so only need to specify action
+  });
 
 });
 
@@ -38,10 +61,10 @@ var str = "<table>"+
         "</tbody>"+
         "<tbody id='list_clients'>";
       $.each(data,function(index,val){
-        str+="<tr><td>"+ val['users']['first_name']+"</td>"+
-                  "<td>"+val['users']['last_name']+"</td>"+
-                  "<td>"+val['users']['phone_primary']+"</td>"+
-                  "<td>"+val['users']['email_address']+"</td>"+
+        str+="<tr><td>"+ val['User']['first_name']+"</td>"+
+                  "<td>"+val['User']['last_name']+"</td>"+
+                  "<td>"+val['User']['phone_primary']+"</td>"+
+                  "<td>"+val['User']['email_address']+"</td>"+
                   "</tr>";
       });
   str+="</tbody>"+

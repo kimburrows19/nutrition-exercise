@@ -36,7 +36,9 @@ class User extends  AppModel{
 
 	function getClients($consultant_id){
 		$sql = "SELECT * from users where consultant_id = '{$consultant_id}'";
-		$rst = $this->query($sql);
-		return  $rst;
+		return $this->find('all',array('fields'=>array('id','last_name','first_name','phone_primary','email_address'), 'conditions'=>array('consultant_id'=>$consultant_id)));
+	}
+	function getClientPrograms($admin_id){
+		
 	}
 }

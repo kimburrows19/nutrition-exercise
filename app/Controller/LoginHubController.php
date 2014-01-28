@@ -1,12 +1,11 @@
 <?php
 
 class LoginHubController extends AppController {
-	/**
- * This controller's model is users
- */
+	
 	public $uses = array('User');
 
 	function login(){
+		$this->autoRender = false;//sets the controller to have no view.
 		$entered_email = $this->request->data['email_address'];
 		$entered_pw =  $this->request->data['login_pw'];
 		

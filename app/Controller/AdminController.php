@@ -23,6 +23,8 @@ class AdminController extends AppController {
         		case 'add_user':
         			$this->addUser();
         			break;
+        		case 'update_user':
+        			$this->updateUser();
         		
         		default:
         			break;
@@ -32,6 +34,7 @@ class AdminController extends AppController {
 		$consultant=$this->getAdmin();
     	$this->set('consultant',$consultant);
     	$this->set('clients',$clients);
+    	$this->set('client_programs', $this->User->getClientPrograms($this->Session->read('login_id')));
 		$this->render('/Horton/Admin/manageClients');
 
 
@@ -54,14 +57,43 @@ class AdminController extends AppController {
 
 			}
 		}
-		return new CakeResponse(array('type'=>'json','body'=> json_encode(array('val'=>'wasnotabletosave')),'status'=>200));
+//		return new CakeResponse(array('type'=>'json','body'=> json_encode(array('val'=>'wasnotabletosave')),'status'=>200));
 	}
 	function getAdmin(){
 		$lid=$this->Session->read('login_id');
-		return $this->User->find('first',array('conditions'=>array('User.id'=>$lid)));
+		return $this->User->find('first',array('fields'=>array('id','last_name','first_name','phone_primary','email_address'), 'conditions'=>array('User.id'=>$lid)));
 	}
 	function getClients(){
 		$lid=$this->Session->read('login_id');
+
 		return $this->User->getClients($lid);
+	}
+	function updateUserView(){
+		$id = $this->params['url']['id'];
+		$user=$this->User->findById($id);
+		unset($user['User']['login_pw']);unset($user['User']['mui']);
+		$consultants=$this->User->find('all',
+										array('fields' => array('first_name','last_name','id'),
+										'conditions'=>array('role_id'=>3), 
+										'order'=>array('last_name DESC')));
+		$this->set('User',$user);
+		$this->set('Consultant',$this->getAdmin());
+		$this->set('Consultants',$consultants);
+		$this->render('/Horton/Admin/updateUser');
+
+	}
+	function updateUser(){
+		$duser=$this->request->data['user'];
+		$duser_address=$this->request->data['address'];
+		if(!empty($duser)){
+			$this->User->save($duser);
+			if(!empty($duser_address)){
+				$this->User->Address->save($duser_address);
+			}	
+			$this->set('message',"User information successfully updated!");
+			$this->set('_serialize', array('message'));
+			$this->response->statusCode(200);
+		}
+		
 	}
 }
