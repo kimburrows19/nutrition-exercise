@@ -49,10 +49,10 @@
 	<div class='form-group'>
 		<label>
 			Consultant: 
-			<select>
+			<select name="user[consultant_id]">
 			<?php
 				foreach ($Consultants as $c) {?>
-					<option <?php if($c['User']['id']==$User['User']['consultant_id']){echo 'selected=selected';}?> value='<?php echo $c['User']['id']; ?>'><?php echo $c['User']['last_name'].", ".$c['User']['first_name']; ?></option>
+					<option  <?php if($c['User']['id']==$User['User']['consultant_id']){echo 'selected=selected';}?> value='<?php echo $c['User']['id']; ?>'><?php echo $c['User']['last_name'].", ".$c['User']['first_name']; ?></option>
 			<?php	}
 			?>
 			</select>
