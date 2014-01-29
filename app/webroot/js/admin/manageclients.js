@@ -1,8 +1,9 @@
-$(document).ready(function(){
-  $('#add-newuser').hide();
-  $('#btn-adduser').click(function(){
-      $('#add-newuser').toggle('slow',function(){});
+$(document).ready(function(){ 
+  $('.btn-expand-collapse').next('.panel-body').hide();
+  $('.btn-expand-collapse').click(function(){
+      $(this).next('.panel-body').toggle('slow',function(){});
   });
+
   $('#form-add-new-user').submit(function(){
     //then we build the data that will be submitted through the form ... I will call these variables X and Y
     var data = $(this).serialize();
@@ -27,25 +28,44 @@ $(document).ready(function(){
   $('#form-update-user').submit(function(){
     
     var url="../manageClients";
-      var data = $(this).serialize();
-      $.ajax({
-          url: url,
-          type:"POST",
-          dataType:"json",
-          data:data,
-          cache:false,
-          success:function(jsondata){
-            if(jsondata!=='0'){
-            }
-            else{alert('An error has occured');}
+    var data = $(this).serialize();
+    $.ajax({
+        url: url,
+        type:"POST",
+        dataType:"json",
+        data:data,
+        cache:false,
+        success:function(jsondata){
+          if(jsondata!=='0'){
+            alert(jsondata);
           }
+          else{alert('An error has occured');}
+        }
 
-      });
-      return false;
+    });
+    return false;
   });
   $('.btn-edit-user').click(function(){
       var id = $(this).val();
       window.location.href="updateUserView/?id="+id; //cakephp already know what controller we are in so only need to specify action
+  });
+  $('#form-program-calc').submit(function(){
+      var url="../manageClients";
+      var data=$(this).serialize();
+      $.ajax({
+        url:url,
+        type:"POST",
+        dataType:"json",
+        data:data,
+        cache:false,
+        success:function(jsondata){
+            if(jsondata!=='0'){
+
+            }
+            else{alert('An error occured, unable to calculate goals.');}
+        }
+      });
+      return false;
   });
 
 });

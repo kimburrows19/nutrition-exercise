@@ -5,15 +5,15 @@
 									'role'=>'form'))*/?>
 
 <div class="panel panel-primary">
-<div class="panel-heading"><h3 class="panel-title">My Clients</h3></div>
+<div class="panel-heading btn-expand-collapse"><h3 class="panel-title">My Clients</h3></div>
 <div class="panel-body">
 <?php echo $this->element('list_clients', array('clients'=>$clients)); ?>
 </div>
 </div>
 
 <div class="panel panel-primary">
-<div class="panel-heading" id="btn-adduser"><h3 class="panel-title">Add New Client</h3></div>
-<div class="panel-body" id="add-newuser">
+<div class="panel-heading btn-expand-collapse"><h3 class="panel-title">Add New Client</h3></div>
+<div class="panel-body" >
 	<form class="form" role="form" id="form-add-new-user">
 	<input type="hidden" name="user[consultant_id]" value="<?php echo $consultant['User']['id']; ?>"/>
 	<div class="form-group">

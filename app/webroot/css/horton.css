@@ -41,10 +41,9 @@ input, button, select, textarea {
 	margin: 0 auto;
 	max-width: 500px;
 	padding:15px;
-    border:1px solid #ccc;
     border-radius: 4px;
 }
-.btn-adduser{
+.btn-submit{
 	width: 145px;
 }
 .nav{
@@ -55,4 +54,7 @@ input, button, select, textarea {
     margin-bottom: 5px;
     margin-left: 15px;
     width: auto;
+}
+.btn-expand-collapse:hover{
+    cursor: pointer
 }
