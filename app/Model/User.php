@@ -41,4 +41,20 @@ class User extends  AppModel{
 	function getClientPrograms($admin_id){
 		
 	}
+	function calculateProgram($user_id, $data){
+		$doutput = array();
+		$doutput['start_body_fat_perc'] = $data['start_body_fat_perc']/100;
+		$doutput['start_weight'] = $data['start_weight'];
+		$doutput['target_body_fat_perc'] = $data['target_body_fat_perc']/100;
+		$doutput['target_body_lean_mass'] = $data['target_body_lean_mass'];
+
+		$doutput['start_body_fat_mass'] = $doutput['start_body_fat_perc'] * $doutput['start_weight'];
+		$doutput['start_body_lean_mass'] = $doutput['start_weight'] - $doutput['start_body_fat_mass'];
+
+		$doutput['body_fat_perc_deficit'] = $doutput['start_body_fat_perc'] - $doutput['target_body_fat_perc']; //how much % body fat you want to lose
+		$doutput['end_weight'] = $doutput['target_body_lean_mass']/(1-$doutput['target_body_fat_perc']);
+		$doutput['end_body_fat_mass'] = $doutput['end_weight']-$doutput['target_body_lean_mass'];
+
+		return $doutput;
+	}
 }

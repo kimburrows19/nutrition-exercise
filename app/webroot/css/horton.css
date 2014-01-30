@@ -58,3 +58,13 @@ input, button, select, textarea {
 .btn-expand-collapse:hover{
     cursor: pointer
 }
+.hidden{
+    display: none;
+}
+.column{
+    width: 220px;
+    text-align: center;
+}
+#form-calc-results{
+    max-width: 700px;
+}

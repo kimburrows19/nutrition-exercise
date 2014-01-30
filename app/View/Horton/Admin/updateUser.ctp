@@ -80,18 +80,54 @@
 			?>
 			<button class="btn btn-lg btn-primary btn-block btn-submit" type="submit">Submit</button>
 
-		<?php $this->Form->End();?>
+		<?php echo $this->Form->End();?>
+		<form id="form-calc-results" class="form">
+			<label class="column">
+				<h4><span class="label label-danger">Start</span></h4>
+				<label>
+				Start Body Fat
+				<input type="text" id="start_body_fat_perc" class="form-control" value="" />
+				</label>
+				<label>
+				Start Weight
+				<input type="text" id="start_weight" class="form-control" value="" />
+				</label>
+				<label>	
+				Start Body Fat Mass
+				<input type="text" id="start_body_fat_mass" class="form-control" value="" />
+				</label>
+				<label>	
+				Start Body Lean Mass
+				<input type="text" id="start_body_lean_mass" class="form-control" value="" />
+				</label>
+			</label>
+			<label class="column">
+				<h4><span class="label label-warning">Goal</span></h4>
+				<label>	
+				Target Body Fat
+				<input type="text" id="target_body_fat_perc" class="form-control" value="" />
+				</label>
+				<label>	
+				Target Body Lean Mass
+				<input type="text" id="target_body_lean_mass" class="form-control" value="" />
+				</label>
+				<label>	
+				Body Fat Percent Deficit
+				<input type="text" id="body_fat_perc_deficit" class="form-control" value="" />
+				</label>
+			</label>
+			<label class="column">
+				<h4><span class="label label-success">End</span></h4>
+				<label>	
+				End Weight
+				<input type="text" id="end_weight" class="form-control" value="" />
+				</label>
+				<label>	
+				End Body Fat Mass
+				<input type="text" id="end_body_fat_mass" class="form-control" value="" />
+				</label>
+			</label>
+		</form>
 	</div>
 </div>
 <?php echo $this->Html->script('admin/manageclients');?>
-
-<!--start_body_fat_perc:float(%)
-start_weight:int(lbs)
-derived_start_body_fat_mass:int
-derived_start_body_lean_mass:int
-target_body_fat_perc:float(%)
-target_body_lean_mass:int(lbs)
-derived_body_fat_perc_deficit:float(%)
-derived_end_weight:int(lbs)
-derived_end_bod_fat_mass(%)-->
-

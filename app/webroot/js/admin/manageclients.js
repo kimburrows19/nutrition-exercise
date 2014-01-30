@@ -1,5 +1,6 @@
 $(document).ready(function(){ 
   $('.btn-expand-collapse').next('.panel-body').hide();
+  $('#form-calc-results').hide();
   $('.btn-expand-collapse').click(function(){
       $(this).next('.panel-body').toggle('slow',function(){});
   });
@@ -52,6 +53,7 @@ $(document).ready(function(){
   $('#form-program-calc').submit(function(){
       var url="../manageClients";
       var data=$(this).serialize();
+      var form_results = $(this).next('#form-calc-results');
       $.ajax({
         url:url,
         type:"POST",
@@ -60,7 +62,31 @@ $(document).ready(function(){
         cache:false,
         success:function(jsondata){
             if(jsondata!=='0'){
+              var json = jsondata['quote_output']; 
+              form_results.show();
 
+              form_results.find('#start_body_fat_perc').val(json.start_body_fat_perc);
+              form_results.find('#start_weight').val(json.start_weight);
+              form_results.find('#target_body_lean_mass').val(json.target_body_lean_mass);
+              form_results.find('#target_body_fat_perc').val(json.target_body_fat_perc);
+              form_results.find('#start_body_fat_mass').val(json.start_body_fat_mass);
+              form_results.find('#start_body_lean_mass').val(json.start_body_lean_mass);
+              form_results.find('#body_fat_perc_deficit').val(json.body_fat_perc_deficit);
+              form_results.find('#end_weight').val(json.end_weight);
+              form_results.find('#end_body_fat_mass').val(json.end_body_fat_mass);
+              form_results.show();
+              /*
+              "start_body_fat_perc": 0.4,
+        "start_weight": "165",
+        "target_body_fat_perc": 0.2,
+        "target_body_lean_mass": "100",
+        "start_body_fat_mass": 66,
+        "start_body_lean_mass": 99,
+        "body_fat_perc_deficit": 0.2,
+        "end_weight": 125,
+        "end_body_fat_mass": 25
+
+              */
             }
             else{alert('An error occured, unable to calculate goals.');}
         }

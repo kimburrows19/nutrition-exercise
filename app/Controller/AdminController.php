@@ -26,7 +26,7 @@ class AdminController extends AppController {
         		case 'update_user':
         			$this->updateUser();
         			break;
-        		case 'cal_user_program':
+        		case 'calc_user_program':
         			$this->calcUserProgram();
         			break;
 
@@ -101,17 +101,17 @@ class AdminController extends AppController {
 		
 	}
 	function calcUserProgram(){
-		$this->autoRender=false;
-/*		$duser=$this->request->data['user'];
-		$duser_address=$this->request->data['address'];
-		if(!empty($duser)){
-			$this->User->save($duser);
-			if(!empty($duser_address)){
-				$this->User->Address->save($duser_address);
-			}	
-			$this->set('message',"User information successfully updated!");
-			$this->set('_serialize', array('message'));*/
+		//$this->autoRender=false;
+		$user_id=$this->request->data['user']['id'];
+		//var_dump($user_id);
+
+		$quote_input = $this->request->data['program_quote'];
+		
+		if($user_id){
+			$quote_output = $this->User->calculateProgram($user_id, $quote_input);
+			$this->set('quote_output', $quote_output);
+			$this->set('_serialize', array('quote_output'));
 			$this->response->statusCode(200);
-		//}
+		}
 	}
 }
